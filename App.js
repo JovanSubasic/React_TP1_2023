@@ -23,12 +23,23 @@ export default function App() {
   const [text, setText] = useState('');
 
   function addListe() {
-    
+
     // const newList = liste.concat(text);
     // setListe(newList);
-    setListe([...liste, text])
+    setListe([...liste, text]);
 
     setText('');
+  }
+
+  function deleteListe(index) {
+
+    // const newList = liste.concat(text);
+    // setListe(newList);
+    // setListe([...liste, text]);
+
+    // console.log(item)
+    setListe(liste => liste.filter((item, i) => item !== index));
+
   }
 
   return (
@@ -46,8 +57,14 @@ export default function App() {
         /> */}
         {liste.map((item) => {
           return (
-            <View>
+            <View style={styles.listContainer}>
               <Text style={styles.item} key="{item}">{item}</Text>
+              <Button
+                color="red"
+                title="X"
+                
+                onPress={() => deleteListe(item)}
+              />
             </View>
           );
         })}
@@ -95,6 +112,13 @@ const styles = StyleSheet.create({
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
+  },
+  listContainer: {
+    backgroundColor: '#f0f8ff',
+    flexDirection: 'row', // Alignement en ligne
+    justifyContent: 'center', // Alignement centré horizontalement
+    alignItems: 'center', // Alignement centré verticalement
+    margin: 10,
   },
   inputContainer: {
     flexDirection: 'row', // Alignement en ligne
