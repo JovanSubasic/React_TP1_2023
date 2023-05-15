@@ -1,11 +1,17 @@
 import React, {useState} from 'react';
-import {Alert, Modal, StyleSheet, Text, Pressable, View, TextInput} from 'react-native';
+import {Alert, Modal, StyleSheet, Text, Pressable, View, TextInput, Button, TouchableOpacity} from 'react-native';
 
 export default function ModalShow({value , liste, setListe ,index}) {
 
   const [modalVisible, setModalVisible] = useState(false);
 
   const [text, setText] = useState(value);
+  
+  function deleteListe(index) {
+
+    setListe(liste => liste.filter((item, i) => item !== index));
+
+  }
   
   function editListe(newText) {
 
@@ -26,16 +32,19 @@ export default function ModalShow({value , liste, setListe ,index}) {
   }
 
   return (
-    <View style={styles.centeredView}>
+    <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.centeredView}>
+
+      <Text key="{value}">{value}</Text>
+
       <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          // Alert.alert('Modal has been closed.');
           editListe(text);
         }}>
-        <View style={styles.centeredView}>
+
+        <View style={styles.centeredViewModal}>
           <View style={styles.modalView}>
             {/* <Text style={styles.modalText}>Hello World!</Text> */}
             <TextInput
@@ -52,17 +61,34 @@ export default function ModalShow({value , liste, setListe ,index}) {
           </View>
         </View>
       </Modal>
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
-        onPress={() => setModalVisible(true)}>
-        <Text style={styles.textStyle}>Edit</Text>
-      </Pressable>
-    </View>
+
+      <Button
+        color="red"
+        title="X"
+        
+        onPress={() => deleteListe(value)}
+        />
+
+    </TouchableOpacity>
   );  
 };
 
 const styles = StyleSheet.create({
   centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // marginTop: 22,
+    backgroundColor: '#f0f8ff',
+    flexDirection: 'row', // Alignement en ligne
+    justifyContent: 'center', // Alignement centré horizontalement
+    alignItems: 'center', // Alignement centré verticalement
+    margin: 10,
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  centeredViewModal: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -73,15 +99,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 20,
     padding: 35,
-    // alignItems: 'center',
-    // shadowColor: '#000',
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 2,
-    // },
-    // shadowOpacity: 0.25,
-    // shadowRadius: 4,
-    // elevation: 5,
   },
   button: {
     borderRadius: 20,

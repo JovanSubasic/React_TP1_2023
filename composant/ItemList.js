@@ -8,12 +8,6 @@ export default function ItemList({liste, setListe}) {
 
     
 
-  function deleteListe(index) {
-
-    // console.log(item)
-    setListe(liste => liste.filter((item, i) => item !== index));
-
-  }
 
   return (
     /*
@@ -34,16 +28,8 @@ export default function ItemList({liste, setListe}) {
     <FlatList  
         data={liste}
         renderItem={({item , index}) => 
-            <View style={styles.listContainer}>
-                
-                <Text key="{item}">{item}</Text>
+            <View >
                 <ModalShow setListe={setListe} value={item} liste={liste} index={index}/>
-                <Button
-                color="red"
-                title="X"
-                
-                onPress={() => deleteListe(item)}
-                />
             </View>
         }
         keyExtractor={item => item}
@@ -54,14 +40,4 @@ export default function ItemList({liste, setListe}) {
 }
 
 const styles = StyleSheet.create({
-  listContainer: {
-    backgroundColor: '#f0f8ff',
-    flexDirection: 'row', // Alignement en ligne
-    justifyContent: 'center', // Alignement centré horizontalement
-    alignItems: 'center', // Alignement centré verticalement
-    margin: 10,
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
 });
