@@ -27,6 +27,7 @@ export default function ItemList({liste, setListe}) {
 
     <FlatList  
         data={liste}
+        scrollEnabled={false}
         renderItem={({item , index}) => 
             <View >
                 <ModalShow setListe={setListe} value={item} liste={liste} index={index}/>
