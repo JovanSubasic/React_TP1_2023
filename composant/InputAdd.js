@@ -4,7 +4,7 @@ import React , {useState} from 'react';
 
 
 
-export default function ItemList({list, setListe}) {
+export default function ItemList({liste, setListe}) {
 
     const [text, setText] = useState('');
 
@@ -12,7 +12,7 @@ export default function ItemList({list, setListe}) {
 
         // const newList = liste.concat(text);
         // setListe(newList);
-        setListe([...list, text]);
+        setListe([...liste, text]);
 
         setText('');
     }

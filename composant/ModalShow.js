@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Alert, Modal, StyleSheet, Text, Pressable, View, TextInput} from 'react-native';
 
-export default function ModalShow({value}) {
+export default function ModalShow({value , liste, setListe ,index}) {
 
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -9,18 +9,19 @@ export default function ModalShow({value}) {
   
   function editListe(newText) {
 
-    // console.log(item)
-    // setListe(list => list.filter((item, i) => item !== index));
+    /*
+    liste.map((item, index) => {
+      // console.log('newText :', item);
+      if(value == item) liste[index] = newText ;
+    })*/
 
-    list.map((item, index) => {
-       if(newText == item) list[index] = newText;
-    })
-    // const newUsers = [...list];
-    // newUsers[index].name = 'New Name';
-    // newUsers[index].rollNo = 'New RollNo';
-    setListe(list);
+    const newListe = [...liste]; 
+    newListe[index] = newText; 
+    setListe(newListe); 
+    
+    console.log('newList :', liste);
 
-    setModalVisible(!modalVisible)
+    setModalVisible(!modalVisible);
 
   }
 
@@ -45,8 +46,8 @@ export default function ModalShow({value}) {
             />
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>Modifier</Text>
+              onPress={() => editListe(text)}>
+              <Text style={styles.textStyle}>Edit</Text>
             </Pressable>
           </View>
         </View>
@@ -54,10 +55,10 @@ export default function ModalShow({value}) {
       <Pressable
         style={[styles.button, styles.buttonOpen]}
         onPress={() => setModalVisible(true)}>
-        <Text style={styles.textStyle}>Modifier</Text>
+        <Text style={styles.textStyle}>Edit</Text>
       </Pressable>
     </View>
-  );
+  );  
 };
 
 const styles = StyleSheet.create({
@@ -84,8 +85,7 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 20,
-    padding: 10,
-    elevation: 2,
+    padding: 5,
   },
   buttonOpen: {
     backgroundColor: '#daa520',
@@ -102,12 +102,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: 'center',
   },
-  inputContainer: {
-        flexDirection: 'row', // Alignement en ligne
-        justifyContent: 'center', // Alignement centré horizontalement
-        alignItems: 'center', // Alignement centré verticalement
-        margin: 10,
-    },
     input: {
       height: 40,
       margin: 12,

@@ -4,14 +4,14 @@ import React , {useState} from 'react';
 import ModalShow from './ModalShow';
 
 
-export default function ItemList({list, setListe}) {
+export default function ItemList({liste, setListe}) {
 
     
 
   function deleteListe(index) {
 
     // console.log(item)
-    setListe(list => list.filter((item, i) => item !== index));
+    setListe(liste => liste.filter((item, i) => item !== index));
 
   }
 
@@ -32,12 +32,12 @@ export default function ItemList({list, setListe}) {
     })*/
 
     <FlatList  
-        data={list}
-        renderItem={({item}) => 
+        data={liste}
+        renderItem={({item , index}) => 
             <View style={styles.listContainer}>
                 
                 <Text key="{item}">{item}</Text>
-                <ModalShow value={item} />
+                <ModalShow setListe={setListe} value={item} liste={liste} index={index}/>
                 <Button
                 color="red"
                 title="X"
